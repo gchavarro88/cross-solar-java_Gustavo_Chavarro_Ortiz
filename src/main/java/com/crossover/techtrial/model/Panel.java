@@ -40,7 +40,21 @@ public class Panel implements Serializable {
   @Column(name = "brand")
   String brand;
 
-  public Long getId() {
+  
+  
+  public Panel(Long id, @NotNull String serial, Double longitude, Double latitude, String brand) {
+	this.id = id;
+	this.serial = serial;
+	this.longitude = longitude;
+	this.latitude = latitude;
+	this.brand = brand;
+}
+
+  public Panel() {
+	  
+  }
+ 
+public Long getId() {
     return id;
   }
 

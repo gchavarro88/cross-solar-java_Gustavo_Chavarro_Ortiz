@@ -2,7 +2,7 @@ package com.crossover.techtrial.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +39,7 @@ public class HourlyElectricity implements Serializable {
   Long generatedElectricity;
   
   @Column(name = "reading_at")
-  LocalDateTime readingAt;
+  Timestamp readingAt;
 
   public Long getId() {
     return id;
@@ -65,11 +65,11 @@ public class HourlyElectricity implements Serializable {
     this.generatedElectricity = generatedElectricity;
   }
 
-  public LocalDateTime getReadingAt() {
+  public Timestamp getReadingAt() {
     return readingAt;
   }
 
-  public void setReadingAt(LocalDateTime readingAt) {
+  public void setReadingAt(Timestamp readingAt) {
     this.readingAt = readingAt;
   }
 

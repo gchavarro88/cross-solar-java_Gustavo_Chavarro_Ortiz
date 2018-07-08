@@ -1,11 +1,11 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet author="crossover" id="1001122001_create_tables">
-        <createTable tableName="panel">
+        <createTable tableName="panel"> 
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="pk_panel"/>
-            </column>
-            <column name="serial" type="VARCHAR(255)"/>
+            </column> 
+            <column name="serial" type="VARCHAR(255)" />
             <column name="latitude" type="DOUBLE"/>
             <column name="longitude" type="DOUBLE"/>
             <column name="brand" type="VARCHAR(255)"/>
@@ -14,11 +14,29 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="pk_hourly_electricity"/>
             </column>
-            <column name="panel_id" type="BIGINT"/>
+            <column name="panel_id" type="BIGINT">
+            </column>
             <column name="generated_electricity" type="BIGINT"/>
             <column name="reading_at" type="datetime"/>
         </createTable>
     </changeSet>
+    
+	<changeSet author="guschaor" id="1001122001_addNotNull1">
+		<addNotNullConstraint tableName="panel"	columnName="serial" constraintName="notNullHourly" columnDataType="BIGINT"/>
+	</changeSet>
+	
+	<changeSet author="guschaor" id="1001122001_addNotNull2">
+		<addNotNullConstraint
+			tableName="hourly_electricity" columnName="panel_id" constraintName="notNullHourly" columnDataType="BIGINT"/>
+	</changeSet>
+	<changeSet author="guschaor" id="1001122001_addUnique3">
+		<addUniqueConstraint
+			tableName="panel" constraintName="ukPanelSerial" columnNames="serial" />
+	</changeSet>
+	<changeSet author="guschaor" id="1001122001_addForeign">
+	<addForeignKeyConstraint constraintName="fk_panel_hourly" referencedTableName="panel"
+	baseColumnNames="panel_id" baseTableName="hourly_electricity" referencedColumnNames="id"/>
+	</changeSet>
     <changeSet author="java" id="1001122003">
        <insert tableName="panel">
          <column name="id">1</column>
@@ -28,11 +46,89 @@
          <column name="brand">tesla</column>
          </insert>
      </changeSet>
-     <changeSet author="java" id="1001122004">
+     <changeSet author="java" id="1001122004"> 
        <insert tableName="hourly_electricity">
          <column name="panel_id">1</column>
          <column name="generated_electricity">100</column>
          <column name="reading_at">2018-01-31 09:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122005"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">310</column>
+         <column name="reading_at">2018-01-31 23:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122006"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">200</column>
+         <column name="reading_at">2018-01-31 12:00:12</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122007"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">110</column>
+         <column name="reading_at">2018-01-31 11:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122008"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">120</column>
+         <column name="reading_at">2018-01-31 09:50:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122009"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">111</column>
+         <column name="reading_at">2018-01-31 12:00:00</column>
+         </insert>
+     </changeSet>
+     <!--             Others values in the future                        -->
+     <changeSet author="java" id="1001122010"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">100</column>
+         <column name="reading_at">2018-01-08 09:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122011"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">310</column>
+         <column name="reading_at">2018-01-08 23:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122012"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">200</column>
+         <column name="reading_at">2018-01-08 12:00:12</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122013"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">110</column>
+         <column name="reading_at">2018-01-08 11:00:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122014"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">120</column>
+         <column name="reading_at">2018-01-08 09:50:00</column>
+         </insert>
+     </changeSet>
+     <changeSet author="java" id="1001122015"> 
+       <insert tableName="hourly_electricity">
+         <column name="panel_id">1</column>
+         <column name="generated_electricity">111</column>
+         <column name="reading_at">2018-08-08 12:00:00</column>
          </insert>
      </changeSet>
 </databaseChangeLog>
